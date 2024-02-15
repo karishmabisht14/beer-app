@@ -2,11 +2,14 @@ import React from "react";
 import BeerCard from "./BeerCard";
 import InfiniteScroll from "react-infinite-scroll-component";
 
-const Home = ({ beers, onToggleFavorite, page }) => {
+const Home = ({ beers, onToggleFavorite, onScrollPage, page }) => {
+  const handleScroll = () => {
+    onScrollPage(page + 1);
+  };
   return (
     <InfiniteScroll
       dataLength={beers.length}
-      next={page}
+      next={handleScroll}
       hasMore={true}
       loader={<h4>Loading...</h4>}
     >

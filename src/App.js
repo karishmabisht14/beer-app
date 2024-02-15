@@ -16,7 +16,6 @@ function App() {
     fetchBeers(query, page)
       .then((data) => {
         setBeers((prevBeers) => [...prevBeers, ...data]);
-        setPage((prevPage) => prevPage + 1);
       })
       .catch((error) => console.error("Error fetching beers:", error));
   }, [query, page]);
@@ -68,6 +67,7 @@ function App() {
               beers={beers}
               onToggleFavorite={handleToggleFavorite}
               page={page}
+              onScrollPage={setPage}
             />
           }
         />
