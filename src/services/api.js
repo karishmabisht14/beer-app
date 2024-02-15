@@ -1,7 +1,5 @@
 import axios from "axios";
-
-const BASE_URL = "https://api.punkapi.com/v2/beers";
-const BEER_PER_PAGE = 3;
+import { BASE_URL, BEER_PER_PAGE } from "../utils/constants";
 
 export const fetchBeers = async (query, page) => {
   try {

@@ -1,34 +1,40 @@
 import React from "react";
-import { Col, Row } from "react-bootstrap";
-import Button from "react-bootstrap/Button";
-import Card from "react-bootstrap/Card";
+import { Image } from "react-bootstrap";
+import FavouriteIcon from "./FavouriteIcon";
 
 const BeerCard = ({ beer, onToggleFavorite }) => {
-  const { name, description, image_url, id, favorite } = beer;
-
+  const { name, image_url, id, favourite, description } = beer;
   return (
-    <Card style={{ maxWidth: "40rem" }}>
-      <Row>
-        <Col lg={4} style={{ margin: "auto", textAlign: "center" }}>
-          <Card.Img
-            variant="left"
-            src={image_url}
-            alt={name}
-            fluid={true}
-            style={{ maxWidth: "60px" }}
-          />
-        </Col>
-        <Col lg={8}>
-          <Card.Body>
-            <Card.Title>{name}</Card.Title>
-            <Card.Text>{description}</Card.Text>
-            <Button variant="primary" onClick={() => onToggleFavorite(id)}>
-              {favorite ? "Remove from Favorites" : "Add to Favorites"}
-            </Button>
-          </Card.Body>
-        </Col>
-      </Row>
-    </Card>
+    <div className="flip-card card-margin">
+      <div className="flip-card-inner">
+        <div className="flip-card-front ">
+          <div className="topright" onClick={() => onToggleFavorite(id)}>
+            {favourite ? (
+              <FavouriteIcon color="red" />
+            ) : (
+              <FavouriteIcon color="white" />
+            )}
+          </div>
+          <div className="imageContainer">
+            <Image src={image_url} alt="Avatar" />
+            <h5>{name}</h5>
+          </div>
+        </div>
+        <div className="d-flex justify-content-center align-items-center flip-card-back">
+          <div className="topright" onClick={() => onToggleFavorite(id)}>
+            {favourite ? (
+              <FavouriteIcon color="red" />
+            ) : (
+              <FavouriteIcon color="white" />
+            )}
+          </div>
+          <div>
+            <h5>{name}</h5>
+            <p>{description}</p>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 
