@@ -21,6 +21,13 @@ function App() {
       .catch((error) => console.error("Error fetching beers:", error));
   }, [query, page]);
 
+  useEffect(() => {
+    const favoriteBears = localStorage.getItem("favorites")
+      ? JSON.parse(localStorage.getItem("favorites"))
+      : [];
+    setFavorites(favoriteBears);
+  }, []);
+
   const handleSearch = (searchQuery) => {
     console.log("Searching....", searchQuery);
     setQuery(searchQuery);
@@ -34,6 +41,7 @@ function App() {
     setBeers(updatedBeers);
 
     const updatedFavorites = updatedBeers.filter((beer) => beer.favorite);
+    localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
     setFavorites(updatedFavorites);
   };
 
@@ -44,6 +52,7 @@ function App() {
     setBeers(updatedBeers);
 
     const updatedFavorites = updatedBeers.filter((beer) => beer.favorite);
+    localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
     setFavorites(updatedFavorites);
   };
 
